@@ -1,0 +1,60 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./laravel:/var/www/app
+      - ./data/uploads:/var/www/uploads
+      - ./dev/nginx:/etc/nginx/templates
+    networks:
+      projectnet:
+        aliases:
+          - myproject.test
+
+  db:
+    image: mysql:8.4
+    hostname: db
+    # ports:
+    #   - 3306:3306
+    restart: unless-stopped
+    env_file:
+      - ./dev/database/.env
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - projectnet
+    command: "--mysql_native_password=on"
+
+  phpmyadmin:
+    image: phpmyadmin
+    hostname: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+    networks:
+      - projectnet
+
+  laravel:
+    hostname: laravel
+    restart: unless-stopped
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: ./dev/php/Dockerfile
+    volumes:
+      - ./laravel:/var/www/app
+      - ./data/uploads:/var/www/uploads
+      - ./dev/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - projectnet
+  
+volumes:
+  dbdata:
+
+networks:
+  projectnet:
+    driver: bridge
