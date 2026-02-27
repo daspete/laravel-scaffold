@@ -18,6 +18,11 @@ RUN apt-get install -y --no-install-recommends \
     libjpeg62-turbo-dev \
     libzip-dev
 
+RUN curl -sL https://deb.nodesource.com/setup_24.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt-get install -y --no-install-recommends nodejs
+RUN rm nodesource_setup.sh
+
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-configure exif
 
