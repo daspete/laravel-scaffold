@@ -1,6 +1,6 @@
 # laravel scaffold
 
-Just a laravel docker scaffolding project.
+Just a laravel docker scaffolding project. It uses inertia with vue 3.
 
 ## TODO
 

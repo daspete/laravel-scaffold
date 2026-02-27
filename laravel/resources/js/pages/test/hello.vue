@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { Head } from '@inertiajs/vue3'
 
-defineProps({ user: Object })
+defineProps<{ user: { name: string } }>();
 </script>
 
 <template>

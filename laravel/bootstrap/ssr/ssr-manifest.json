@@ -1,4 +1,10 @@
 {
-  "resources/js/pages/test/hello.vue": [],
-  "resources/js/ssr.js": []
+  "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
+  "resources/js/pages/test/hello.vue": [
+    "/build/assets/hello-DB6akekt.js"
+  ],
+  "resources/js/pages/test/hello.vue?vue&type=script&setup=true&lang.ts": [
+    "/build/assets/hello-DB6akekt.js"
+  ],
+  "resources/js/ssr.ts": []
 }
